@@ -98,7 +98,11 @@ group :development, :test do
 end
 
 group :development do
-  gem 'capistrano'
+  gem 'capistrano', '3.1.0', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rbenv', '~> 2.0', require: false
+  gem 'capistrano3-unicorn', require: false
 
   # better errors
   gem 'better_errors'    , :platform => :ruby_19
@@ -122,9 +126,10 @@ group :test do
   gem 'coveralls', :require => false
 end
 
-group :heroku, :production do
-  gem 'unicorn'
-end
+# group :heroku, :production do
+#   gem 'unicorn'
+# end
+gem 'unicorn'
 
 
 # Gems used only for assets and not required
