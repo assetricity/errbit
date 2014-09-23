@@ -3,8 +3,14 @@
 worker_processes 3 # amount of unicorn workers to spin up
 timeout 30         # restarts workers that hang for 30 seconds
 preload_app true
-listen ENV['PORT'] || 8080
-pid ENV['UNICORN_PID'] if ENV['UNICORN_PID']
+# listen ENV['PORT'] || 8080
+# pid ENV['UNICORN_PID'] if ENV['UNICORN_PID']
+
+# listen on both a Unix domain socket and a TCP port,
+# we use a shorter backlog for quicker failover when busy
+# listen "/tmp/.sock", :backlog => 64
+listen 5000, :tcp_nopush => true
+pid "/var/www/apps/errbit/shared/pids/unicorn.pid"
 
 # Taken from github: https://github.com/blog/517-unicorn
 # Though everyone uses pretty miuch the same code
